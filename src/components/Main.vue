@@ -1,8 +1,7 @@
 <template>
   <div class="main">
     <header-menu />
-    <room-list />
-    {{ rooms }}
+    <room-list :rooms='rooms'/>
   </div>
 </template>
 
@@ -27,5 +26,12 @@ export default {
 
 <style scoped lang="scss">
 
+.main {
+    display: flex;
+    width: 1300px;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 </style>
