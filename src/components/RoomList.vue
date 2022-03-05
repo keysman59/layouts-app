@@ -1,29 +1,27 @@
 <template>
     <div class="room-list">
-        <div v-for="room in rooms" :key="room.id" class="room-item">
-            <div class="room-item__top">
-                {{ room.floor + ' Этаж' }}
-                {{ room.rooms + ' Комната' }} -  {{ room.square }}  
-            </div>
-            <div class="room-item__wrp-img">
-                <img class="room-item__img" :src="require(`../assets/images/${room.plan.toLowerCase()}`)">
-            </div>
-            <div class="room-item__price">
-                {{ room.price }}
-            </div>
-            <div class="room-item__mprice">
-                {{ Math.round(room.price / room.square) + ' за м2' }}
-            </div>
-            <button class="room-item__btn">Подробнее</button>
+        <Room-item
+            v-for="room in rooms" 
+            :key="room.id" 
+            :floor="room.floor"
+            :rooms="room.rooms"
+            :img="room.plan"
+            :price="room.price"
+            :square="room.square"
+        ></Room-item>
+        <div>
         </div>
     </div>
 </template>
 
 <script>
-// import RoomItem from '@/components/RoomItem'
+import RoomItem from '@/components/RoomItem'
 
 export default {
     name: 'RoomList',
+    components: {
+        RoomItem
+    },
     props: ['rooms'],
 }
 
