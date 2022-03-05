@@ -22,6 +22,11 @@ body {
   background: #F8F8F8 !important;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .app-name__caption {
   font-style: normal;
   font-weight: normal;

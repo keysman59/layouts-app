@@ -1,12 +1,12 @@
 <template>
   <div class="main">
-    <header-menu />
+    <Filter-menu />
     <room-list :rooms='rooms'/>
   </div>
 </template>
 
 <script>
-import HeaderMenu from '@/components/HeaderMenu'
+import FilterMenu from '@/components/FilterMenu'
 import RoomList from '@/components/RoomList'
 
 
@@ -18,7 +18,7 @@ export default {
     }
   },
   components: {
-    HeaderMenu,
+    FilterMenu,
     RoomList
   }
 }
@@ -28,6 +28,7 @@ export default {
 
 .main {
     display: flex;
+    flex-direction: column;
     width: 1300px;
     max-width: 100%;
     margin-right: auto;
