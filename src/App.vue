@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h2 class="app-name__caption">Планировки</h2>
     <Main />
   </div>
 </template>
@@ -16,5 +17,19 @@ export default {
 </script>
 
 <style lang="scss">
+
+body {
+  background: #F8F8F8 !important;
+}
+
+.app-name__caption {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 60px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #2C323A;
+}
 
 </style>

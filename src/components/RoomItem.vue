@@ -1,8 +1,12 @@
 <template>
     <div class="room-item">
         <div class="room-item__top">
-            {{ floor + ' Этаж' }}
-            {{ rooms + ' Комната' }} -  {{ square }}  
+            <div class="room-item__text text-opacity">
+                {{ compFloor }}
+            </div>
+            <div class="room-item__text">
+                {{ compRooms }} -  {{ square }}  
+            </div>
         </div>
         <div class="room-item__wrp-img">
             <img class="room-item__img" :src="require(`../assets/images/${img.toLowerCase()}`)">
@@ -10,8 +14,8 @@
         <div class="room-item__price">
             {{ price }}
         </div>
-        <div class="room-item__mprice">
-            {{ Math.round(price / square) + ' за м2' }}
+        <div class="room-item__text text-opacity">
+            {{ compMprice }}
         </div>
         <button class="room-item__btn">Подробнее</button>
     </div>
@@ -22,7 +26,18 @@
 
 export default {
     name: 'RoomItem',
-    props: ['floor','square','rooms','price','img']
+    props: ['floor','square','rooms','price','img'],
+    computed: {
+        compFloor() {
+            return this.floor + ' Этаж'
+        },
+        compRooms() {
+            return this.rooms + ' Комната'
+        },
+        compMprice() {
+            return Math.round(this.price / this.square) + ' за м2'
+        }
+    }
 }
 
 </script>
@@ -36,6 +51,8 @@ export default {
     width: 100%;
     height: 365px;  
     padding: 8px 10px 10px 10px; 
+    background: #FFFFFF;
+    margin-bottom: 30px;
 
     &__top {
         display: flex;
@@ -44,14 +61,29 @@ export default {
         flex: 0 0 auto;
     }
 
+    &__price {
+        color: #2C323A;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 28px;
+        text-align: end;
+    }
+
+    &__text {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 28px;
+        text-align: end;
+    }
+
     &__wrp-img {
-        width: 188px;
-        height: 230px;
+        width: 100%;
     }
 
     &__img {
         width: 100%;
-        height: 100%;
     }
 
     &__btn {
@@ -64,7 +96,12 @@ export default {
         border-color: transparent;
         outline: none;
         width: 100%;
+        border-radius: 5px;
     }
+}
+
+.text-opacity {
+    opacity: 0.5;
 }
 
 </style>
