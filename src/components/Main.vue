@@ -1,29 +1,31 @@
 <template>
-  <div class="hello">
-
+  <div class="main">
+    <header-menu />
+    <room-list />
+    {{ rooms }}
   </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
+import HeaderMenu from '@/components/HeaderMenu'
+import RoomList from '@/components/RoomList'
 
+
+export default {
+  name: 'vMain',
+  computed: {
+    rooms () {
+      return this.$store.state.data
+    }
+  },
+  components: {
+    HeaderMenu,
+    RoomList
+  }
 }
 </script>
 
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
+
 </style>
