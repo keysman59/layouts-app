@@ -65,7 +65,7 @@ export default {
 
     &__button {
         background: #FFFFFF;
-        border: 1px solid #D8D8D8;
+        border: 1px solid #70D24E;
         border-radius: 5px;
         margin-right: 4px;
         width: 100%;
@@ -83,6 +83,7 @@ export default {
     
 
     &__input {
+        padding-left: 29px;
         background: #FFFFFF;
         border: 1px solid #D8D8D8;
         border-radius: 5px;
