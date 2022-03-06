@@ -1,5 +1,5 @@
 <template>
-    <div class="room-item">
+    <div class="room-item" @mouseover="itemHover" @mouseleave="itemUnhover">
         <div class="room-item__top">
             <div class="room-item__text text-opacity">
                 {{ compFloor }}
@@ -17,7 +17,9 @@
         <div class="room-item__text text-opacity">
             {{ compMprice }}
         </div>
-        <button class="room-item__btn">Подробнее</button>
+        <transition name="animate-button"> 
+            <button class="room-item__btn" v-if="show">Подробнее</button>
+        </transition>
     </div>
     
 </template>
@@ -27,6 +29,11 @@
 export default {
     name: 'RoomItem',
     props: ['floor','square','rooms','price','img'],
+    data() {
+        return {
+            show: false
+        }
+    },
     computed: {
         compFloor() {
             return this.floor + ' Этаж'
@@ -39,6 +46,14 @@ export default {
         },
         compPrice() {
             return  String(this.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + 'р.'
+        }
+    },
+    methods: {
+        itemHover() {
+            this.show = true
+        },
+        itemUnhover() {
+            this.show = false
         }
     }
 }
@@ -57,6 +72,7 @@ export default {
     padding: 8px 10px 10px 10px; 
     background: #FFFFFF;
     margin-bottom: 30px;
+    overflow: hidden;
 
     &:last-child {
         margin-right: 0;
@@ -89,10 +105,18 @@ export default {
 
     &__wrp-img {
         width: 100%;
+        height: 250px;
+        transition: height .3s ease;
+    }
+
+    &:hover .room-item__wrp-img {
+        height: 200px;
     }
 
     &__img {
         width: 100%;
+        object-fit: cover;
+        height: 100%;
     }
 
     &__btn {
@@ -111,6 +135,13 @@ export default {
 
 .text-opacity {
     opacity: 0.5;
+}
+
+.animate-button-enter-active, .animate-button-leave-active {
+  transition: opacity .5s;
+}
+.animate-button-enter, .animate-button-leave-to {
+  opacity: 0;
 }
 
 </style>
