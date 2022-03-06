@@ -14,3 +14,10 @@ body {
     font-style: normal; 
     font-weight: normal; 
 } 
+
+@font-face {
+    font-family: "GothamPro-bold"; 
+    src: url("./fonts/gothampro_bold.ttf") format("truetype"); 
+    font-style: normal; 
+    font-weight: normal; 
+} 

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <Filter-menu />
-    <room-list :rooms='rooms'/>
+    <Filter-menu :filterData='rooms'/>
+    <room-list :filterData='rooms'/>
   </div>
 </template>
 
@@ -14,12 +14,15 @@ export default {
   name: 'vMain',
   computed: {
     rooms () {
-      return this.$store.state.data
+      return this.$store.state.filterData
     }
   },
   components: {
     FilterMenu,
     RoomList
+  },
+  created() {
+    this.$store.dispatch('getData')
   }
 }
 </script>

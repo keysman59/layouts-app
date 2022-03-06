@@ -128,11 +128,28 @@ export default new Vuex.Store({
          "square":66.60
       }
    ],
+   filterData: []
   },
   mutations: {
-
+   filterFeedStart(state, filterData) {
+      state.filterData = filterData
+   },
+   setData() {}
   },
   actions: {
-
+   getData({ commit, state }) {
+      state.filterData = state.data
+      commit('setData')
+   },
+   filterFeed({ commit, state },  config ) {
+      console.log(state.data);
+      console.log(config)
+      let floorMin = config.floorMin
+      let floorMax = config.floorMax
+      
+      let filterData = state.data.filter(item => item.floor >= floorMin  && item.floor <= floorMax )
+      console.log(filterData)
+      commit('filterFeedStart', filterData)
+   }
   }
 })

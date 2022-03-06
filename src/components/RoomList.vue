@@ -1,7 +1,7 @@
 <template>
     <div class="room-list">
         <Room-item
-            v-for="room in rooms" 
+            v-for="room in filterData" 
             :key="room.id" 
             :floor="room.floor"
             :rooms="room.rooms"
@@ -22,7 +22,7 @@ export default {
     components: {
         RoomItem
     },
-    props: ['rooms'],
+    props: ['filterData'],
 }
 
 </script>
@@ -32,7 +32,7 @@ export default {
 .room-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
 }
 

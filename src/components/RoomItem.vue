@@ -12,7 +12,7 @@
             <img class="room-item__img" :src="require(`../assets/images/${img.toLowerCase()}`)">
         </div>
         <div class="room-item__price">
-            {{ price }}
+            {{ compPrice }}
         </div>
         <div class="room-item__text text-opacity">
             {{ compMprice }}
@@ -36,6 +36,9 @@ export default {
         },
         compMprice() {
             return Math.round(this.price / this.square) + ' за м2'
+        },
+        compPrice() {
+            return  String(this.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + 'р.'
         }
     }
 }
@@ -48,11 +51,16 @@ export default {
     box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.05);
     border-radius: 10px;
     max-width: 23%;
+    margin-right: 2.0%;
     width: 100%;
     height: 365px;  
     padding: 8px 10px 10px 10px; 
     background: #FFFFFF;
     margin-bottom: 30px;
+
+    &:last-child {
+        margin-right: 0;
+    }
 
     &__top {
         display: flex;
@@ -68,6 +76,7 @@ export default {
         font-size: 20px;
         line-height: 28px;
         text-align: end;
+        font-family: 'GothamPro-bold';
     }
 
     &__text {

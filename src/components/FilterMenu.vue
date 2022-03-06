@@ -9,8 +9,8 @@
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">Этаж</div>
-            <input class="filter-menu__input" type="text" placeholder="1">
-            <input class="filter-menu__input" type="text" placeholder="99">
+            <input class="filter-menu__input" type="text" v-model="floorMin" placeholder="1">
+            <input class="filter-menu__input" type="text" v-model="floorMax" placeholder="99">
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">Площадь</div>
@@ -23,7 +23,7 @@
             <input class="filter-menu__input" type="text" placeholder="99">
         </div>     
         <div class="filter-menu__btn-block">
-            <button class="filter-menu__button">Применить</button>
+            <button class="filter-menu__button" @click="applyFilter">Применить</button>
             <p class="filter-menu__button-filter">сбросить фильтр</p>
         </div>  
     </div>
@@ -32,7 +32,25 @@
 <script>
 
 export default {
-    name: 'FilterMenu'
+    name: 'FilterMenu',
+    props: ['filterData'],
+    data() {
+        return {
+            floorMin: 1,
+            floorMax: 10,
+            config: {}
+        }
+    },
+    methods: {
+        applyFilter() {
+            this.config = {
+                floorMin: this.floorMin,
+                floorMax: this.floorMax
+            };
+            console.log(this.config)
+            this.$store.dispatch('filterFeed', this.config)
+        }
+    }
 }
 
 </script>
