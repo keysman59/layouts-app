@@ -7,6 +7,12 @@ body {
     background: #F8F8F8 !important;
     font-family: "GothamPro", sans-serif !important;
 }
+
+.active {
+	background: rgba(112, 210, 78, 0.5) !important;
+	border: 1px solid rgba(112, 210, 78, 0.5) !important;
+	color: white;
+}
   
 @font-face {
     font-family: "GothamPro"; 

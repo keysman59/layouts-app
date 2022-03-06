@@ -2,10 +2,10 @@
     <div class="filter-menu">
         <div class="filter-menu__block">
             <div class="filter-menu__caption">Комнаты</div>
-            <button class="filter-menu__buttons-room">S</button>
-            <button class="filter-menu__buttons-room">1K</button>
-            <button class="filter-menu__buttons-room">2K</button>
-            <button class="filter-menu__buttons-room">3K</button>
+            <!-- <button class="filter-menu__buttons-room" @click="filterRooms('all')">S</button> -->
+            <button class="filter-menu__buttons-room" @click="filterRooms(1)" :class="{ active: arrRooms.includes(1) }">1K</button>
+            <button class="filter-menu__buttons-room" @click="filterRooms(2)" :class="{ active: arrRooms.includes(2) }">2K</button>
+            <button class="filter-menu__buttons-room" @click="filterRooms(3)" :class="{ active: arrRooms.includes(3) }">3K</button>
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">Этаж</div>
@@ -14,17 +14,17 @@
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">Площадь</div>
-            <input class="filter-menu__input" type="text" placeholder="5">
-            <input class="filter-menu__input" type="text" placeholder="99">
+            <input class="filter-menu__input" type="text" v-model="squareMin" placeholder="5">
+            <input class="filter-menu__input" type="text" v-model="squareMax" placeholder="99">
         </div>   
         <div class="filter-menu__block">
             <div class="filter-menu__caption">Стоимость</div>
-            <input class="filter-menu__input" type="text" placeholder="9">
-            <input class="filter-menu__input" type="text" placeholder="99">
+            <input class="filter-menu__input" type="text" v-model="costMin" placeholder="9">
+            <input class="filter-menu__input" type="text" v-model="costMax" placeholder="99">
         </div>     
         <div class="filter-menu__btn-block">
             <button class="filter-menu__button" @click="applyFilter">Применить</button>
-            <p class="filter-menu__button-filter">сбросить фильтр</p>
+            <p class="filter-menu__button-filter" @click="clearFilter">сбросить фильтр</p>
         </div>  
     </div>
 </template>
@@ -38,17 +38,42 @@ export default {
         return {
             floorMin: 1,
             floorMax: 10,
-            config: {}
+            squareMin: 1,
+            squareMax: 67,
+            costMin: 1,
+            costMax: 9956317,
+            rooms: [],
+            config: {},
+            arrRooms: [1]
         }
     },
     methods: {
         applyFilter() {
             this.config = {
                 floorMin: this.floorMin,
-                floorMax: this.floorMax
+                floorMax: this.floorMax,
+                squareMin: this.squareMin,
+                squareMax: this.squareMax,
+                costMin: this.costMin,
+                costMax: this.costMax,
+                arrRooms: this.arrRooms
             };
             console.log(this.config)
-            this.$store.dispatch('filterFeed', this.config)
+            this.$store.dispatch('filterRooms', this.config)
+        },
+        filterRooms(room) {
+            if(this.arrRooms.includes(room)) {
+                var index = this.arrRooms.indexOf(room);
+                if (index !== -1) {
+                    this.arrRooms.splice(index, 1);
+                }
+            } else {
+                this.arrRooms.push(room);
+            }
+        },
+        clearFilter() {
+            this.config = {}
+            this.$store.dispatch('getData', this.config)
         }
     }
 }
