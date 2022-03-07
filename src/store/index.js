@@ -126,6 +126,23 @@ export default new Vuex.Store({
          "rooms":4,
          "size":"4",
          "square":66.60
+      },
+
+
+      {
+         "building_id":87,
+         "building_name":"1 этап 1а корпуса",
+         "floor":9,
+         "id":33321,
+         "is_studio":1,
+         "number":"163",
+         // "plan":"/img/bb8d/9eeb90d9c7aeeed41fb41c0b5e383013.jpg",
+         "plan":"9eeb90d9c7aeeed41fb41c0b5e383013.png",
+         "porch":3,
+         "price":9956317,
+         "rooms":4,
+         "size":"4",
+         "square":82.60
       }
    ],
    filterData: []
@@ -146,19 +163,19 @@ export default new Vuex.Store({
       console.log(config)
       let floorMin = config.floorMin
       let floorMax = config.floorMax
-      let arrRooms = config.arrRooms
       let squareMin = config.squareMin
       let squareMax = config.squareMax
       let costMin = config.costMin
       let costMax = config.costMax
 
-      let filterData = state.data.filter(item => item.floor >= floorMin && item.floor <= floorMax && item.square >= squareMin && item.square <= squareMax && item.price >= costMin && item.price <= costMax )
+      let arrRooms = config.arrRooms
+
+      let filterData = state.data.filter(item => item.floor >= floorMin && item.floor <= floorMax && item.square >= squareMin && Math.round(item.square) <= squareMax && item.price >= costMin && item.price <= costMax )
 
       let secondFilter = filterData.filter((item) => {
          return arrRooms.includes(item.rooms);
        });
 
-      // console.log(filterData)
       commit('filterFeedStart', secondFilter)
    }
   }

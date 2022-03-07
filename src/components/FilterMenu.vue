@@ -2,15 +2,16 @@
     <div class="filter-menu">
         <div class="filter-menu__block">
             <div class="filter-menu__caption">КОМНАТЫ</div>
-            <!-- <button class="filter-menu__buttons-room" @click="filterRooms('all')">S</button> -->
+            <!-- <button class="filter-menu__buttons-room" @click="filterRooms(0)" :class="{ active: arrRooms.includes(0) }">S</button> -->
             <button class="filter-menu__buttons-room" @click="filterRooms(1)" :class="{ active: arrRooms.includes(1) }">1K</button>
             <button class="filter-menu__buttons-room" @click="filterRooms(2)" :class="{ active: arrRooms.includes(2) }">2K</button>
             <button class="filter-menu__buttons-room" @click="filterRooms(3)" :class="{ active: arrRooms.includes(3) }">3K</button>
+            <button class="filter-menu__buttons-room" @click="filterRooms(4)" :class="{ active: arrRooms.includes(4) }">4K</button>
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">ЭТАЖ</div>
             <input class="filter-menu__input" type="text" v-model="rangeFloor[0]" placeholder="1">
-            <input class="filter-menu__input" type="text" v-model="rangeFloor[1]" placeholder="99">
+            <input class="filter-menu__input" type="text" v-model="rangeFloor[1]" placeholder="10">
             <VueSimpleRangeSlider
                 :min="0"
                 :max="10"
@@ -20,10 +21,10 @@
         <div class="filter-menu__block">
             <div class="filter-menu__caption">ПЛОЩАДЬ, м<span class="filter-menu__m2">&#178;</span></div>
             <input class="filter-menu__input" type="text" v-model="rangeSquare[0]" placeholder="1">
-            <input class="filter-menu__input" type="text" v-model="rangeSquare[1]" placeholder="10">
+            <input class="filter-menu__input" type="text" v-model="rangeSquare[1]" placeholder="99">
             <VueSimpleRangeSlider
                 :min="1"
-                :max="100"
+                :max="99"
                 v-model="rangeSquare"
             />
         </div>   
@@ -55,11 +56,11 @@ export default {
     data() {
         return {
             rangeFloor: [1,10],
-            rangeSquare: [20,100],
+            rangeSquare: [1,99],
             rangeCost: [10,10000000],
             rooms: [],
             config: {},
-            arrRooms: [1]
+            arrRooms: [1,2,3,4]
         }
     },
     methods: {
@@ -122,8 +123,14 @@ export default {
         border: 1px solid #D8D8D8;
         border-radius: 5px;
         margin-right: 4px;
+        margin-bottom: 4px;
         width: 47px;
         height: 40px;
+        font-family: "GothamPro-bold", sans-serif !important;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 28px;
     }
 
     &__button {
