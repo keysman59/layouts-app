@@ -5,17 +5,18 @@
                 {{ compFloor }}
             </div>
             <div class="room-item__text">
-                {{ compRooms }} -  {{ square }}  
+                {{ compRooms }} -  {{ compSquare }}<sup>2</sup>  
             </div>
         </div>
         <div class="room-item__wrp-img">
             <img class="room-item__img" :src="require(`../assets/images/${img.toLowerCase()}`)">
+            <div class="room-item__img-label">{{ compNumber }}</div>
         </div>
         <div class="room-item__price">
             {{ compPrice }}
         </div>
         <div class="room-item__text text-opacity">
-            {{ compMprice }}
+            {{ compMprice }}<sup>2</sup>
         </div>
         <transition name="animate-button"> 
             <button class="room-item__btn" v-if="show">Подробнее</button>
@@ -28,7 +29,7 @@
 
 export default {
     name: 'RoomItem',
-    props: ['floor','square','rooms','price','img'],
+    props: ['floor','square','rooms','price','img','number'],
     data() {
         return {
             show: false
@@ -38,15 +39,22 @@ export default {
         compFloor() {
             return this.floor + ' Этаж'
         },
+        compSquare() {
+            return this.square + ' м'
+        },
         compRooms() {
             return this.rooms + ' Комната'
         },
         compMprice() {
-            return Math.round(this.price / this.square) + ' за м2'
+            let calcMprice = Math.round(this.price / this.square)
+            return  String(calcMprice).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + ' за м'
         },
         compPrice() {
             return  String(this.price).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + 'р.'
-        }
+        },
+        compNumber() {
+            return '№ ' + this.number 
+        },
     },
     methods: {
         itemHover() {
@@ -68,7 +76,7 @@ export default {
     max-width: 23%;
     margin-right: 2.0%;
     width: 100%;
-    height: 344px;
+    height: 355px;
     padding: 8px 10px 10px 10px; 
     background: #FFFFFF;
     margin-bottom: 30px;
@@ -87,6 +95,7 @@ export default {
         justify-content: space-between;
         width: 100%;
         flex: 0 0 auto;
+        padding-left: 5px;
     }
 
     &__price {
@@ -97,14 +106,15 @@ export default {
         line-height: 28px;
         text-align: end;
         font-family: 'GothamPro-bold';
+        padding-right: 5px;
     }
 
     &__text {
-        font-style: normal;
-        font-weight: bold;
         font-size: 12px;
         line-height: 28px;
         text-align: end;
+        padding-right: 5px;
+        font-family: 'GothamPro-bold';
     }
 
     &__wrp-img {
@@ -113,6 +123,8 @@ export default {
         border: 1px solid #EBEBEB;
         border-radius: 5px;
         transition: height .3s ease;
+        position: relative;
+        margin-bottom: 11px;
     }
 
     &:hover .room-item__wrp-img {
@@ -123,6 +135,22 @@ export default {
         width: 100%;
         object-fit: cover;
         height: 100%;
+    }
+
+    &__img-label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-top: 2px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-bottom: 1px solid #EBEBEB;
+        border-left: 1px solid #EBEBEB;
+        border-radius: 0px 5px; 
+        font-family: 'GothamPro-bold';
+        font-size: 14px;
+        line-height: 28px;
+        text-transform: uppercase;
     }
 
     &__btn {

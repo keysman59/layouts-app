@@ -8,6 +8,7 @@
             :img="room.plan"
             :price="room.price"
             :square="room.square"
+            :number="room.number"
         ></Room-item>
         <div>
         </div>
