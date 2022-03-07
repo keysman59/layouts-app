@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <h2 class="app-name__caption">Планировки</h2>
-    <Main />
+    <div class="container">
+      <div class="row">
+        <h2 class="app-name__caption">Планировки</h2>
+      </div>
+      <Main />
+    </div>
   </div>
 </template>
 

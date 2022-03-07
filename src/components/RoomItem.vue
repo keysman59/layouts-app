@@ -68,11 +68,15 @@ export default {
     max-width: 23%;
     margin-right: 2.0%;
     width: 100%;
-    height: 365px;  
+    height: 344px;
     padding: 8px 10px 10px 10px; 
     background: #FFFFFF;
     margin-bottom: 30px;
     overflow: hidden;
+
+    &:hover {
+        box-shadow: 0px 5px 20px rgba(86, 86, 86, 0.25);
+    }
 
     &:last-child {
         margin-right: 0;
@@ -106,6 +110,8 @@ export default {
     &__wrp-img {
         width: 100%;
         height: 250px;
+        border: 1px solid #EBEBEB;
+        border-radius: 5px;
         transition: height .3s ease;
     }
 
@@ -130,6 +136,10 @@ export default {
         outline: none;
         width: 100%;
         border-radius: 5px;
+        transition: background-color .3s;
+        &:hover {
+            background: #61BD42;
+        }
     }
 }
 

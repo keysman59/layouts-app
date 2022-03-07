@@ -1,24 +1,24 @@
 <template>
     <div class="filter-menu">
         <div class="filter-menu__block">
-            <div class="filter-menu__caption">Комнаты</div>
+            <div class="filter-menu__caption">КОМНАТЫ</div>
             <!-- <button class="filter-menu__buttons-room" @click="filterRooms('all')">S</button> -->
             <button class="filter-menu__buttons-room" @click="filterRooms(1)" :class="{ active: arrRooms.includes(1) }">1K</button>
             <button class="filter-menu__buttons-room" @click="filterRooms(2)" :class="{ active: arrRooms.includes(2) }">2K</button>
             <button class="filter-menu__buttons-room" @click="filterRooms(3)" :class="{ active: arrRooms.includes(3) }">3K</button>
         </div>
         <div class="filter-menu__block">
-            <div class="filter-menu__caption">Этаж</div>
+            <div class="filter-menu__caption">ЭТАЖ</div>
             <input class="filter-menu__input" type="text" v-model="floorMin" placeholder="1">
             <input class="filter-menu__input" type="text" v-model="floorMax" placeholder="99">
         </div>
         <div class="filter-menu__block">
-            <div class="filter-menu__caption">Площадь</div>
+            <div class="filter-menu__caption">ПЛОЩАДЬ, м<span class="filter-menu__m2">&#178;</span></div>
             <input class="filter-menu__input" type="text" v-model="squareMin" placeholder="5">
             <input class="filter-menu__input" type="text" v-model="squareMax" placeholder="99">
         </div>   
         <div class="filter-menu__block">
-            <div class="filter-menu__caption">Стоимость</div>
+            <div class="filter-menu__caption">СТОИМОСТЬ, млн. р.</div>
             <input class="filter-menu__input" type="text" v-model="costMin" placeholder="9">
             <input class="filter-menu__input" type="text" v-model="costMax" placeholder="99">
         </div>     
@@ -89,12 +89,15 @@ export default {
 
     &__block {
         margin-right: 60px;
+        width: 100%;
     }
 
     &__btn-block {
         display: flex;
         flex-direction: column;
         border-radius: 5px;
+        width: 100%;
+        padding-top: 26px;
     }
 
     &__buttons-room {
@@ -110,28 +113,71 @@ export default {
         background: #FFFFFF;
         border: 1px solid #70D24E;
         border-radius: 5px;
-        margin-right: 4px;
         width: 100%;
-        max-width: 201px;
         height: 40px;
         background: #70D24E;
         color: #fff;
         margin-bottom: 5px;
+        font-family: "GothamPro-bold", sans-serif !important;
+        text-transform: uppercase;
+        font-size: 14px;
+        line-height: 28px;
+        transition: background-color .3s;
+        &:hover {
+            background: #61BD42;
+        }
     }
 
     &__button-filter {
         cursor: pointer;
-        border-bottom: 1px solid #70D24E;
+        text-align: center;
+        position: relative;
+        font-family: "GothamPro-bold", sans-serif !important;
+        font-size: 10px;
+        line-height: 28px;
+        text-transform: uppercase;
+
+        &::after {
+            content: '';
+            position: absolute;
+            height: 1px;
+            width: 108px;
+            bottom: 4px;
+            left: 24%;
+            background: #70D24E;
+        }
+    }
+
+    &__caption {
+        font-family: "GothamPro-bold", sans-serif !important;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 28px;
+        color: #2C323A;
+    }
+
+    &__m2 {
+        font-family: sans-serif !important;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 28px;
+        color: #2C323A;
     }
     
 
     &__input {
-        padding-left: 29px;
+        padding-left: 15px;
+        padding-right: 15px;
         background: #FFFFFF;
         border: 1px solid #D8D8D8;
         border-radius: 5px;
         width: 80px;
         margin-right: 15px;
+        padding-top: 7px;
+        padding-bottom: 5px;
+        text-align: center;
     }   
 }
 

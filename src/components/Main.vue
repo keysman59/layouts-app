@@ -29,13 +29,5 @@ export default {
 
 <style scoped lang="scss">
 
-.main {
-    display: flex;
-    flex-direction: column;
-    width: 1300px;
-    max-width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-}
 
 </style>

@@ -8,10 +8,19 @@ body {
     font-family: "GothamPro", sans-serif !important;
 }
 
+#app {
+    padding-top: 38px;
+}
+
 .active {
-	background: rgba(112, 210, 78, 0.5) !important;
-	border: 1px solid rgba(112, 210, 78, 0.5) !important;
+	background: #70D24E !important;
+	border: 1px solid #70D24E !important;
 	color: white;
+    transition: background-color .3s;
+}
+
+.filter-menu__buttons-room .active {
+    background: #61BD42;
 }
   
 @font-face {
