@@ -65,7 +65,6 @@ export default {
     },
     methods: {
         applyFilter() {
-            console.log('Нажали apply')
             this.config = {
                 floorMin: this.rangeFloor[0],
                 floorMax: this.rangeFloor[1],
@@ -75,6 +74,7 @@ export default {
                 costMax: this.rangeCost[1],
                 arrRooms: this.arrRooms
             };
+
             console.log(this.config)
             this.$store.dispatch('filterRooms', this.config)
         },

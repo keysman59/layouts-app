@@ -158,23 +158,10 @@ export default new Vuex.Store({
       state.filterData = state.data
       commit('setData')
    },
-   filterRooms({ commit, state },  config ) {
-      console.log(state.data);
-      console.log(config)
-      let floorMin = config.floorMin
-      let floorMax = config.floorMax
-      let squareMin = config.squareMin
-      let squareMax = config.squareMax
-      let costMin = config.costMin
-      let costMax = config.costMax
-
-      let arrRooms = config.arrRooms
+   filterRooms({ commit, state },  {floorMin, floorMax, squareMin, squareMax, costMin, costMax, arrRooms} ) {
 
       let filterData = state.data.filter(item => item.floor >= floorMin && item.floor <= floorMax && item.square >= squareMin && Math.round(item.square) <= squareMax && item.price >= costMin && item.price <= costMax )
-
-      let secondFilter = filterData.filter((item) => {
-         return arrRooms.includes(item.rooms);
-       });
+      let secondFilter = filterData.filter((item) => arrRooms.includes(item.rooms) );
 
       commit('filterFeedStart', secondFilter)
    }
