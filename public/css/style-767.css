@@ -1,0 +1,8 @@
+@media screen and (max-width: 767px) {
+  
+    .filter-menu__block {
+        width: 100% !important;
+        max-width: 302px !important;
+    }
+
+}

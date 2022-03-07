@@ -10,8 +10,10 @@
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">ЭТАЖ</div>
-            <input class="filter-menu__input" type="text" v-model="rangeFloor[0]" placeholder="1">
-            <input class="filter-menu__input" type="text" v-model="rangeFloor[1]" placeholder="10">
+            <div class="filter-menu__inputs-block">
+                <input class="filter-menu__input" type="text" v-model="rangeFloor[0]" placeholder="1">
+                <input class="filter-menu__input" type="text" v-model="rangeFloor[1]" placeholder="10">
+            </div>
             <VueSimpleRangeSlider
                 :min="0"
                 :max="10"
@@ -20,8 +22,10 @@
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">ПЛОЩАДЬ, м<span class="filter-menu__m2">&#178;</span></div>
-            <input class="filter-menu__input" type="text" v-model="rangeSquare[0]" placeholder="1">
-            <input class="filter-menu__input" type="text" v-model="rangeSquare[1]" placeholder="99">
+            <div class="filter-menu__inputs-block">
+                <input class="filter-menu__input" type="text" v-model="rangeSquare[0]" placeholder="1">
+                <input class="filter-menu__input" type="text" v-model="rangeSquare[1]" placeholder="99">
+            </div>
             <VueSimpleRangeSlider
                 :min="1"
                 :max="99"
@@ -30,11 +34,13 @@
         </div>   
         <div class="filter-menu__block">
             <div class="filter-menu__caption">СТОИМОСТЬ, млн. р.</div>
-            <input class="filter-menu__input" type="text" v-model="rangeCost[0]" placeholder="9">
-            <input class="filter-menu__input" type="text" v-model="rangeCost[1]" placeholder="99">
+            <div class="filter-menu__inputs-block">
+                <input class="filter-menu__input" type="text" v-model="rangeCost[0]" placeholder="1">
+                <input class="filter-menu__input" type="text" v-model="rangeCost[1]" placeholder="29">
+            </div>
             <VueSimpleRangeSlider
-                :min="0"
-                :max="10000000"
+                :min="1"
+                :max="29"
                 v-model="rangeCost"
             />
         </div>     
@@ -57,10 +63,10 @@ export default {
         return {
             rangeFloor: [1,10],
             rangeSquare: [1,99],
-            rangeCost: [10,10000000],
+            rangeCost: [1,29],
             rooms: [],
             config: {},
-            arrRooms: [1,2,3,4]
+            arrRooms: [1]
         }
     },
     methods: {
@@ -74,8 +80,6 @@ export default {
                 costMax: this.rangeCost[1],
                 arrRooms: this.arrRooms
             };
-
-            console.log(this.config)
             this.$store.dispatch('filterRooms', this.config)
         },
         filterRooms(room) {
@@ -104,7 +108,7 @@ export default {
     display: flex;
     margin-top: 50px;
     margin-bottom: 50px;
-
+    margin-right: 2%;
     &__block {
         margin-right: 60px;
         width: 100%;

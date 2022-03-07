@@ -1,0 +1,5 @@
+@media screen and (max-width: 479px) {
+    .room-item {
+        max-width: 98% !important;
+    }
+}

@@ -1,0 +1,15 @@
+@media screen and (max-width: 1400px) {
+
+  .filter-menu__inputs-block {
+    display: flex;
+  }
+
+  .filter-menu__block {
+    margin-right: 30px !important;
+  }
+
+  .filter-menu__button-filter::after {
+    left: 18px !important;
+  }
+
+}
