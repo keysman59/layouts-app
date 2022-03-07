@@ -9,18 +9,33 @@
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">ЭТАЖ</div>
-            <input class="filter-menu__input" type="text" v-model="floorMin" placeholder="1">
-            <input class="filter-menu__input" type="text" v-model="floorMax" placeholder="99">
+            <input class="filter-menu__input" type="text" v-model="rangeFloor[0]" placeholder="1">
+            <input class="filter-menu__input" type="text" v-model="rangeFloor[1]" placeholder="99">
+            <VueSimpleRangeSlider
+                :min="0"
+                :max="10"
+                v-model="rangeFloor"
+            />
         </div>
         <div class="filter-menu__block">
             <div class="filter-menu__caption">ПЛОЩАДЬ, м<span class="filter-menu__m2">&#178;</span></div>
-            <input class="filter-menu__input" type="text" v-model="squareMin" placeholder="5">
-            <input class="filter-menu__input" type="text" v-model="squareMax" placeholder="99">
+            <input class="filter-menu__input" type="text" v-model="rangeSquare[0]" placeholder="1">
+            <input class="filter-menu__input" type="text" v-model="rangeSquare[1]" placeholder="10">
+            <VueSimpleRangeSlider
+                :min="1"
+                :max="100"
+                v-model="rangeSquare"
+            />
         </div>   
         <div class="filter-menu__block">
             <div class="filter-menu__caption">СТОИМОСТЬ, млн. р.</div>
-            <input class="filter-menu__input" type="text" v-model="costMin" placeholder="9">
-            <input class="filter-menu__input" type="text" v-model="costMax" placeholder="99">
+            <input class="filter-menu__input" type="text" v-model="rangeCost[0]" placeholder="9">
+            <input class="filter-menu__input" type="text" v-model="rangeCost[1]" placeholder="99">
+            <VueSimpleRangeSlider
+                :min="0"
+                :max="10000000"
+                v-model="rangeCost"
+            />
         </div>     
         <div class="filter-menu__btn-block">
             <button class="filter-menu__button" @click="applyFilter">Применить</button>
@@ -30,18 +45,18 @@
 </template>
 
 <script>
+import VueSimpleRangeSlider from 'vue-simple-range-slider';
+import 'vue-simple-range-slider/dist/vueSimpleRangeSlider.css'
 
 export default {
     name: 'FilterMenu',
     props: ['filterData'],
+    components: { VueSimpleRangeSlider },
     data() {
         return {
-            floorMin: 1,
-            floorMax: 10,
-            squareMin: 1,
-            squareMax: 67,
-            costMin: 1,
-            costMax: 9956317,
+            rangeFloor: [1,10],
+            rangeSquare: [20,100],
+            rangeCost: [10,10000000],
             rooms: [],
             config: {},
             arrRooms: [1]
@@ -49,13 +64,14 @@ export default {
     },
     methods: {
         applyFilter() {
+            console.log('Нажали apply')
             this.config = {
-                floorMin: this.floorMin,
-                floorMax: this.floorMax,
-                squareMin: this.squareMin,
-                squareMax: this.squareMax,
-                costMin: this.costMin,
-                costMax: this.costMax,
+                floorMin: this.rangeFloor[0],
+                floorMax: this.rangeFloor[1],
+                squareMin: this.rangeSquare[0],
+                squareMax: this.rangeSquare[1],
+                costMin: this.rangeCost[0],
+                costMax: this.rangeCost[1],
                 arrRooms: this.arrRooms
             };
             console.log(this.config)
@@ -73,6 +89,7 @@ export default {
         },
         clearFilter() {
             this.config = {}
+            this.arrRooms = [1]
             this.$store.dispatch('getData', this.config)
         }
     }
@@ -136,6 +153,7 @@ export default {
         font-size: 10px;
         line-height: 28px;
         text-transform: uppercase;
+        margin-bottom: 0px;
 
         &::after {
             content: '';
@@ -179,6 +197,26 @@ export default {
         padding-bottom: 5px;
         text-align: center;
     }   
+}
+
+.range-slider {
+    width: 200px;
+    margin: auto 16px;
+    text-align: center;
+    position: relative;
+}
+
+.range-slider input[type=range] {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    z-index: 2;
+    position: relative;
+    top: 2px;
+    margin-top: -7px;
 }
 
 </style>
